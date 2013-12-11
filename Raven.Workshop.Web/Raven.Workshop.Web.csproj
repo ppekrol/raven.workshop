@@ -60,6 +60,9 @@
     <Reference Include="Raven.Client.Lightweight">
       <HintPath>..\shared_libs\Raven.Client\Raven.Client.Lightweight.dll</HintPath>
     </Reference>
+    <Reference Include="Raven.Client.MvcIntegration">
+      <HintPath>..\shared_libs\Raven.Client\Raven.Client.MvcIntegration.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
