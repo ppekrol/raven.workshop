@@ -1,46 +1,63 @@
-﻿@model Raven.Workshop.Web.Models.TestModel
+﻿@model Raven.Abstractions.Data.DatabaseStatistics
 
 @{
     ViewBag.Title = "Zadanie 1";
 }
 
 <div class="page-header">
-    <h1>Zadanie I <small>tworzenie kontrolera</small></h1>
+    <h1>Zadanie I</h1>
 </div>
 <p class="lead">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec sagittis purus. Nulla quis nisi arcu. Nullam lobortis vulputate libero, sit amet dapibus diam porttitor nec. Donec accumsan interdum mauris in malesuada. Cras porttitor interdum ante et ullamcorper. Cras quis tellus lacus. Aliquam non justo iaculis, sagittis arcu eu, ullamcorper lectus. Sed id ligula velit. Ut rutrum felis tortor, eu cursus augue dignissim vel. Donec vitae nunc feugiat, eleifend libero bibendum, dignissim est. Morbi at blandit nibh, posuere faucibus dui. Quisque ullamcorper elementum enim, sed bibendum ante sollicitudin id. Aenean id dolor id risus ultrices tincidunt.
+    Zadaniem jest stworzenie głównego obiektu klienckiego RavenDB - <i>DocumentStore</i> oraz uzupełnienia klasy bazowej <i>RavenController</i>.
 </p>
+
+<ol>
+    <li>Stworzenie i inicjalizacja statycznego obiektu DocumentStore</li>
+    <li>Stworzenie bazy danych (studio lub kod)</li>
+    <li>Inicjalizowanie obiektu sesji per akcja kontrolera</li>
+    <li>Zapisywanie zmian na sesji po wykonaniu akcji</li>
+</ol>
+
 <hr/>
 
-@using (Html.BeginForm("Index", "Ex1", FormMethod.Post, new { @class = "form-horizontal" }))
+@if (Model == null)
 {
-    <div class="row">
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
-    </div>
-    <div class="row">
-        <div class="control-group">
-            @Html.LabelFor(model => model.FirstName, new { @class = "control-label" })
-            <div class="controls">
-                @Html.EditorFor(model => model.FirstName)
-                @Html.ValidationMessageFor(model => model.FirstName)
-            </div>
+    <div>DocumentStore niezainicjalizowany</div>
+}
+else
+{
+    <h3>Statystyki bazy: </h3> 
+
+    <div>
+        <div class="row">
+            @Html.DisplayNameFor(model => model.DatabaseId): @Html.DisplayFor(model => model.DatabaseId)
         </div>
-    </div>
-    <div class="row">
-        <div class="control-group">
-            @Html.LabelFor(model => model.LastName, new { @class = "control-label" })
-            <div class="controls">
-                @Html.EditorFor(model => model.LastName)
-                @Html.ValidationMessageFor(model => model.LastName)
-            </div>
+        <div class="row">
+            @Html.DisplayNameFor(model => model.CountOfDocuments): @Html.DisplayFor(model => model.CountOfDocuments)
         </div>
-    </div>
-    <div class="row">
-        <div class="control-group">
-            <div class="controls">
-                <button type="submit" class="btn btn-large btn-success">Submit</button>
-            </div>
+        <div class="row">
+            @Html.DisplayNameFor(model => model.CountOfIndexes): @Html.DisplayFor(model => model.CountOfIndexes)
+        </div>
+        <div class="row" style="margin-left: 100px">
+            @foreach (var index in Model.Indexes)
+            {
+                <div>@index.Name</div>
+            }
+        </div>
+        <div class="row">
+            @Html.DisplayNameFor(model => model.LastDocEtag): @Model.LastDocEtag.ToString()
+        </div>
+        <div class="row">
+            @Html.DisplayNameFor(model => model.LastAttachmentEtag): @Model.LastAttachmentEtag.ToString()
+        </div>
+        <div class="row">
+            @Html.DisplayNameFor(model => model.CurrentNumberOfItemsToIndexInSingleBatch): @Html.DisplayFor(model => model.CurrentNumberOfItemsToIndexInSingleBatch)
+        </div>
+         <div class="row">
+            @Html.DisplayNameFor(model => model.CurrentNumberOfItemsToReduceInSingleBatch): @Html.DisplayFor(model => model.CurrentNumberOfItemsToReduceInSingleBatch)
+        </div>
+        <div class="row">
+            @Html.DisplayNameFor(model => model.ApproximateTaskCount): @Html.DisplayFor(model => model.ApproximateTaskCount)
         </div>
     </div>
 }

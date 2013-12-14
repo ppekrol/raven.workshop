@@ -2,24 +2,26 @@
 {
     using System.Web.Mvc;
 
-    using Raven.Workshop.Web.Models;
-
-    public class Ex1Controller : Controller
+	public class Ex1Controller : RavenController
     {
         public ActionResult Index()
         {
-            return View();
+	        var dbStats = DocumentStore != null
+							  ? DocumentStore.DatabaseCommands.GetStatistics()
+		                      : null;
+
+            return View(dbStats);
         }
 
-        [HttpPost]
-        public ActionResult Index(TestModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+		//[HttpPost]
+		//public ActionResult Index(TestModel model)
+		//{
+		//	if (!ModelState.IsValid)
+		//	{
+		//		return View(model);
+		//	}
 
-            return View(model);
-        }
+		//	return View(model);
+		//}
     }
 }

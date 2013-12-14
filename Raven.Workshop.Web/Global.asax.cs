@@ -1,4 +1,5 @@
 ﻿using Raven.Client.Document;
+using Raven.Client.Extensions;
 
 namespace Raven.Workshop.Web
 {
@@ -16,18 +17,23 @@ namespace Raven.Workshop.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+	        var databaseName = "tgd.net.workshop";
+
 	        DocumentStoreHolder.Store = new DocumentStore()
 		        {
 			        Url = "http://localhost:8080",
-			        DefaultDatabase = "tgd.net.workshop"
+			        DefaultDatabase = databaseName
 		        }.Initialize();
+
+			DocumentStoreHolder.Store.DatabaseCommands.EnsureDatabaseExists(databaseName);
 
 	        InitializeRavenProfiler();
         }
 
 		private void InitializeRavenProfiler()
 		{
-			Raven.Client.MvcIntegration.RavenProfiler.InitializeFor(DocumentStoreHolder.Store);
+			if (DocumentStoreHolder.Store != null)
+				Client.MvcIntegration.RavenProfiler.InitializeFor(DocumentStoreHolder.Store);
 		}
     }
 }
