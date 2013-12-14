@@ -1,4 +1,8 @@
-﻿namespace Raven.Workshop.Web
+﻿using Raven.Client;
+using Raven.Workshop.Web.Indexes;
+using Raven.Workshop.Web.Transformers;
+
+namespace Raven.Workshop.Web
 {
     using System;
     using System.Web.Mvc;
@@ -24,7 +28,8 @@
             {
                 InitializeDocumentStore();
                 InitializeRavenProfiler();
-                IndexConfig.DeployIndexes(DocumentStoreHolder.Store);
+                DeployIndexes(DocumentStoreHolder.Store);
+				DeployTransformers(DocumentStoreHolder.Store);
 
                 WorkshopHelper.IsConnected = true;
             }
@@ -33,7 +38,19 @@
             }
         }
 
-        private static void InitializeDocumentStore()
+	    private void DeployTransformers(IDocumentStore store)
+	    {
+		    new CompaniesWithEmployees().Execute(store);
+	    }
+
+	    private void DeployIndexes(IDocumentStore store)
+	    {
+			new CompanyEmployees().Execute(store);
+			new EmployeesByFirstNameCount().Execute(store);
+			new CompanyByName().Execute(store);
+	    }
+
+	    private static void InitializeDocumentStore()
         {
             var databaseName = "tgd.net.workshop";
 

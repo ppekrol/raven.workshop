@@ -1,4 +1,6 @@
-﻿namespace Raven.Workshop.Web.Controllers
+﻿using Raven.Workshop.Web.Indexes;
+
+namespace Raven.Workshop.Web.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
@@ -13,7 +15,7 @@
 
             var results =
                 RavenSession
-                .Query<IndexConfig.EmployeesByFirstNameCount.Result, IndexConfig.EmployeesByFirstNameCount>()
+                .Query<EmployeesByFirstNameCount.Result, EmployeesByFirstNameCount>()
                 .ToList();
 
             return View(results);

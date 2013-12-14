@@ -1,4 +1,6 @@
-﻿namespace Raven.Workshop.Web.Controllers
+﻿using Raven.Workshop.Web.Indexes;
+
+namespace Raven.Workshop.Web.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
@@ -14,7 +16,7 @@
 
             var companies = RavenSession
                 .Advanced
-                .LuceneQuery<Company, IndexConfig.CompanyEmployees>()
+                .LuceneQuery<Company, CompanyEmployees>()
                 .WhereStartsWith("FirstName", "J")
                 .ToList();
 
