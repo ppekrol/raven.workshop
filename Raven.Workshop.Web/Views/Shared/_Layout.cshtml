@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Raven.Workshop.Web
+@using Raven.Workshop.Web.Helpers
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -17,7 +19,22 @@
             </div>
         </div>
     </div>
-
+    <div id="status" class="container">
+        <div class="row">
+            <div class="span12">
+                <div class="pull-right">
+                    @if (WorkshopHelper.IsConnected)
+                    {
+                        <i class="icon-ok"></i> <span>Połączono z serwerem</span>
+                    }
+                    else
+                    {
+                        <i class="icon-remove"></i> <span>Brak połączenia z serwerem</span>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="content" class="container">
         @RenderBody()
     </div>

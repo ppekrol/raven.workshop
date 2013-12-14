@@ -1,11 +1,14 @@
-﻿using Raven.Client.Document;
-using Raven.Client.Extensions;
-
-namespace Raven.Workshop.Web
+﻿namespace Raven.Workshop.Web
 {
+    using System;
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
+
+    using Raven.Client.Document;
+    using Raven.Client.Extensions;
+    using Raven.Client.MvcIntegration;
+    using Raven.Workshop.Web.Helpers;
 
     public class MvcApplication : System.Web.HttpApplication
     {
@@ -17,23 +20,36 @@ namespace Raven.Workshop.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-	        var databaseName = "tgd.net.workshop";
+            try
+            {
+                InitializeDocumentStore();
+                InitializeRavenProfiler();
 
-	        DocumentStoreHolder.Store = new DocumentStore()
-		        {
-			        Url = "http://localhost:8080",
-			        DefaultDatabase = databaseName
-		        }.Initialize();
-
-			DocumentStoreHolder.Store.DatabaseCommands.EnsureDatabaseExists(databaseName);
-
-	        InitializeRavenProfiler();
+                WorkshopHelper.IsConnected = true;
+            }
+            catch (Exception)
+            {
+            }
         }
 
-		private void InitializeRavenProfiler()
+        private static void InitializeDocumentStore()
+        {
+            var databaseName = "tgd.net.workshop";
+
+            DocumentStoreHolder.Store =
+                new DocumentStore
+                    {
+                        Url = "http://localhost:8080", 
+                        DefaultDatabase = databaseName
+                    }.Initialize();
+
+            DocumentStoreHolder.Store.DatabaseCommands.EnsureDatabaseExists(databaseName);
+        }
+
+        private static void InitializeRavenProfiler()
 		{
 			if (DocumentStoreHolder.Store != null)
-				Client.MvcIntegration.RavenProfiler.InitializeFor(DocumentStoreHolder.Store);
+				RavenProfiler.InitializeFor(DocumentStoreHolder.Store);
 		}
     }
 }
