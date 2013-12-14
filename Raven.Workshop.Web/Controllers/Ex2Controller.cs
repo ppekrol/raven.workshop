@@ -4,6 +4,7 @@
 //  </copyright>
 // -----------------------------------------------------------------------
 
+using System.Linq;
 using System.Web.Mvc;
 using Raven.Workshop.Web.Models;
 
@@ -13,11 +14,17 @@ namespace Raven.Workshop.Web.Controllers
 	{
 		public ActionResult Index()
 		{
+			return View(RavenSession.Query<Employee>().ToList());
+		}
+
+		[HttpGet]
+		public ActionResult Add()
+		{
 			return View();
 		}
 
 		[HttpPost]
-		public ActionResult Index(Employee model)
+		public ActionResult Add(Employee model)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -26,7 +33,19 @@ namespace Raven.Workshop.Web.Controllers
 
 			RavenSession.Store(model);
 
-			return View(model);
+			return RedirectToAction("Index");
+		}
+
+		public ActionResult Edit(string id)
+		{
+			return View("Add", RavenSession.Load<Employee>(id));
+		}
+
+		public ActionResult Delete(string id)
+		{
+			RavenSession.Advanced.DocumentStore.DatabaseCommands.Delete(id, null);
+
+			return RedirectToAction("Index");
 		}
 	}
 }

@@ -185,6 +185,9 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Ex1\Index.cshtml" />
     <Content Include="Views\Ex2\Index.cshtml" />
+    <Content Include="Views\Ex2\View1.cshtml" />
+    <Content Include="Views\Ex2\_Layout.cshtml" />
+    <Content Include="Views\Ex2\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

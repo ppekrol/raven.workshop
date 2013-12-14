@@ -1,55 +1,43 @@
-﻿@model Raven.Workshop.Web.Models.Employee
+﻿@model IEnumerable<Raven.Workshop.Web.Models.Employee>
 
 @{
     ViewBag.Title = "Zadanie 2";
+    Layout = "~/Views/Ex2/_Layout.cshtml";
 }
 
-<div class="page-header">
-    <h1>Zadanie II</h1>
-</div>
-<p class="lead">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec sagittis purus. Nulla quis nisi arcu. Nullam lobortis vulputate libero, sit amet dapibus diam porttitor nec. Donec accumsan interdum mauris in malesuada. Cras porttitor interdum ante et ullamcorper. Cras quis tellus lacus. Aliquam non justo iaculis, sagittis arcu eu, ullamcorper lectus. Sed id ligula velit. Ut rutrum felis tortor, eu cursus augue dignissim vel. Donec vitae nunc feugiat, eleifend libero bibendum, dignissim est. Morbi at blandit nibh, posuere faucibus dui. Quisque ullamcorper elementum enim, sed bibendum ante sollicitudin id. Aenean id dolor id risus ultrices tincidunt.
+<p>
+    @Html.ActionLink("Dodaj pracownika", "Add")
 </p>
-<hr/>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th></th>
+    </tr>
 
-@using (Html.BeginForm("Index", "Ex2", FormMethod.Post, new { @class = "form-horizontal" }))
-{
-    <div class="row">
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
-    </div>
-    <div class="row">
-        <div class="control-group">
-            @Html.LabelFor(model => model.FirstName, new { @class = "control-label" })
-            <div class="controls">
-                @Html.EditorFor(model => model.FirstName)
-                @Html.ValidationMessageFor(model => model.FirstName)
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="control-group">
-            @Html.LabelFor(model => model.LastName, new { @class = "control-label" })
-            <div class="controls">
-                @Html.EditorFor(model => model.LastName)
-                @Html.ValidationMessageFor(model => model.LastName)
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="control-group">
-            @Html.LabelFor(model => model.Age, new { @class = "control-label" })
-            <div class="controls">
-                @Html.EditorFor(model => model.Age)
-                @Html.ValidationMessageFor(model => model.Age)
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="control-group">
-            <div class="controls">
-                <button type="submit" class="btn btn-large btn-success">Submit</button>
-            </div>
-        </div>
-    </div>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>
+    </tr>
 }
+
+</table>
