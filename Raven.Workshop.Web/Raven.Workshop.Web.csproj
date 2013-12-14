@@ -132,9 +132,11 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IndexConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Ex1Controller.cs" />
     <Compile Include="Controllers\Ex2Controller.cs" />
+    <Compile Include="Controllers\Ex3Controller.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RavenController.cs" />
     <Compile Include="DocumentStoreHolder.cs" />
@@ -188,6 +190,7 @@
     <Content Include="Views\Ex2\Index.cshtml" />
     <Content Include="Views\Ex2\_Layout.cshtml" />
     <Content Include="Views\Ex2\Add.cshtml" />
+    <Content Include="Views\Ex3\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

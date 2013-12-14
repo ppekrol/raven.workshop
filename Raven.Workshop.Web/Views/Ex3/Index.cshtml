@@ -1,0 +1,60 @@
+﻿@model IList<Raven.Workshop.Web.Models.Company>
+
+@{
+    ViewBag.Title = "Zadanie III - statyczny indeks";
+}
+
+<div class="page-header">
+    <h1>Zadanie III <small>statyczne indeksy i zapytania Lucene</small></h1>
+</div>
+<p class="lead">
+    Celem tego ćwiczenia jest zapoznanie się z pojęciem statycznego indeksu oraz wykonywaniem zapytań Lucene.
+</p>
+
+<ol>
+    <li>Stworzenie statycznego indeksu, który pomoże nam wykonać zapytanie o wszystkie firmy, w których istnieje co najmniej jeden pracownik, którego imię zaczyna się na 'J'</li>
+    <li>Zapoznanie się z możliwościami ładowania powiązanych dokumentów w indeksie</li>
+    <li>Zapoznanie się z zapytaniami Lucene</li>
+</ol>
+
+<hr />
+
+<div class="row">
+    <div class="span12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model == null || Model.Count == 0)
+                {
+                    <tr>
+                        <td colspan="5">Brak wyników</td>
+                    </tr>
+                }
+                else
+                {
+                    for (int i = 0; i < Model.Count; i++)
+                    {
+                        var employeeWithCompany = Model[i];
+                        <tr>
+                            <td>
+                                @(i + 1)
+                            </td>
+                            <td>
+                                @employeeWithCompany.Name
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

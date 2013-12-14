@@ -24,6 +24,7 @@
             {
                 InitializeDocumentStore();
                 InitializeRavenProfiler();
+                IndexConfig.DeployIndexes(DocumentStoreHolder.Store);
 
                 WorkshopHelper.IsConnected = true;
             }

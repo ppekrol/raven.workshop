@@ -1,16 +1,10 @@
-﻿// -----------------------------------------------------------------------
-//  <copyright file="Employee.cs" company="Hibernating Rhinos LTD">
-//      Copyright (c) Hibernating Rhinos LTD. All rights reserved.
-//  </copyright>
-// -----------------------------------------------------------------------
-
-using System.ComponentModel.DataAnnotations;
-
-namespace Raven.Workshop.Web.Models
+﻿namespace Raven.Workshop.Web.Models
 {
-	public class Employee
+    using System.ComponentModel.DataAnnotations;
+
+    public class Employee
 	{
-		public string Id { get; set; }
+		public int Id { get; set; }
 
 		[Required]
 		[Display(Name = "First Name")]
