@@ -28,35 +28,36 @@ else
 {
     <h3>Statystyki bazy: </h3> 
 
-    <div>
-        <div class="row">
+    <div class="row">
+        <div class="span12">
             @Html.DisplayNameFor(model => model.DatabaseId): @Html.DisplayFor(model => model.DatabaseId)
         </div>
-        <div class="row">
+        <div class="span12">
             @Html.DisplayNameFor(model => model.CountOfDocuments): @Html.DisplayFor(model => model.CountOfDocuments)
         </div>
-        <div class="row">
+        <div class="span12">
             @Html.DisplayNameFor(model => model.CountOfIndexes): @Html.DisplayFor(model => model.CountOfIndexes)
         </div>
-        <div class="row" style="margin-left: 100px">
+        <div class="span1">&nbsp;</div>
+        <div class="span11">
             @foreach (var index in Model.Indexes)
             {
                 <div>@index.Name</div>
             }
         </div>
-        <div class="row">
+        <div class="span12">
             @Html.DisplayNameFor(model => model.LastDocEtag): @Model.LastDocEtag.ToString()
         </div>
-        <div class="row">
+        <div class="span12">
             @Html.DisplayNameFor(model => model.LastAttachmentEtag): @Model.LastAttachmentEtag.ToString()
         </div>
-        <div class="row">
+        <div class="span12">
             @Html.DisplayNameFor(model => model.CurrentNumberOfItemsToIndexInSingleBatch): @Html.DisplayFor(model => model.CurrentNumberOfItemsToIndexInSingleBatch)
         </div>
-         <div class="row">
+        <div class="span12">
             @Html.DisplayNameFor(model => model.CurrentNumberOfItemsToReduceInSingleBatch): @Html.DisplayFor(model => model.CurrentNumberOfItemsToReduceInSingleBatch)
         </div>
-        <div class="row">
+        <div class="span12">
             @Html.DisplayNameFor(model => model.ApproximateTaskCount): @Html.DisplayFor(model => model.ApproximateTaskCount)
         </div>
     </div>

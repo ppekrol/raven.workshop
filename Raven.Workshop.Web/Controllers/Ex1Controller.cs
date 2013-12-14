@@ -1,16 +1,27 @@
 ﻿namespace Raven.Workshop.Web.Controllers
 {
+    using System;
     using System.Web.Mvc;
 
-	public class Ex1Controller : RavenController
+    using Raven.Abstractions.Data;
+
+    public class Ex1Controller : RavenController
     {
         public ActionResult Index()
         {
-	        var dbStats = DocumentStore != null
-							  ? DocumentStore.DatabaseCommands.GetStatistics()
-		                      : null;
+            DatabaseStatistics stats = null;
 
-            return View(dbStats);
+            try
+            {
+                stats = DocumentStore != null
+                              ? DocumentStore.DatabaseCommands.GetStatistics()
+                              : null;
+            }
+            catch (Exception)
+            {
+            }
+
+            return View(stats);
         }
 
 		//[HttpPost]

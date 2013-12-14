@@ -2,8 +2,12 @@
     height: 40px;
 }
 
-#content {
+#status {
     margin-top: 81px;
+    margin-bottom: 20px;
+}
+
+#content {
 }
 
     #content .control-group label {
