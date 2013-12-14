@@ -137,6 +137,7 @@
     <Compile Include="Controllers\Ex1Controller.cs" />
     <Compile Include="Controllers\Ex2Controller.cs" />
     <Compile Include="Controllers\Ex3Controller.cs" />
+    <Compile Include="Controllers\Ex4Controller.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RavenController.cs" />
     <Compile Include="DocumentStoreHolder.cs" />
@@ -191,6 +192,7 @@
     <Content Include="Views\Ex2\_Layout.cshtml" />
     <Content Include="Views\Ex2\Add.cshtml" />
     <Content Include="Views\Ex3\Index.cshtml" />
+    <Content Include="Views\Ex4\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
