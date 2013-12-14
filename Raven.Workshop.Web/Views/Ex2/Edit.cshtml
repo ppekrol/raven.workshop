@@ -5,7 +5,7 @@
     Layout = "~/Views/Ex2/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("Add", "Ex2", FormMethod.Post, new { @class = "form-horizontal" }))
+@using (Html.BeginForm("Edit", "Ex2", FormMethod.Post, new { @class = "form-horizontal" }))
 {
     <div class="row">
         @Html.AntiForgeryToken()
@@ -41,7 +41,7 @@
     <div class="row">
         <div class="control-group">
             <div class="controls">
-                <button type="submit" class="btn btn-large btn-success">Dodaj</button>
+                <button type="submit" class="btn btn-large btn-success">Zapisz</button>
             </div>
         </div>
     </div>

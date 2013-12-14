@@ -8,17 +8,19 @@ namespace Raven.Workshop.Web.Controllers
 	{
 		public ActionResult Index()
 		{
-			return View(RavenSession.Query<Employee>().ToList());
+			var employees = RavenSession.Query<Employee>().Customize(x => x.WaitForNonStaleResultsAsOfNow()).ToList();
+
+			return View(employees);
 		}
 
 		[HttpGet]
 		public ActionResult Add()
 		{
-			return View();
+			return View("Edit");
 		}
 
 		[HttpPost]
-		public ActionResult Add(Employee model)
+		public ActionResult Edit(Employee model)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -30,14 +32,16 @@ namespace Raven.Workshop.Web.Controllers
 			return RedirectToAction("Index");
 		}
 
-		public ActionResult Edit(string id)
+		public ActionResult Edit(int id)
 		{
-			return View("Add", RavenSession.Load<Employee>(id));
+			var employee = RavenSession.Load<Employee>(id);
+
+			return View(employee);
 		}
 
-		public ActionResult Delete(string id)
+		public ActionResult Delete(int id)
 		{
-			RavenSession.Advanced.DocumentStore.DatabaseCommands.Delete(id, null);
+			RavenSession.Delete(RavenSession.Load<Employee>(id));
 
 			return RedirectToAction("Index");
 		}

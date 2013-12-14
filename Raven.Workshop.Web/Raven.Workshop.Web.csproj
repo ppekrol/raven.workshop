@@ -190,7 +190,7 @@
     <Content Include="Views\Ex1\Index.cshtml" />
     <Content Include="Views\Ex2\Index.cshtml" />
     <Content Include="Views\Ex2\_Layout.cshtml" />
-    <Content Include="Views\Ex2\Add.cshtml" />
+    <Content Include="Views\Ex2\Edit.cshtml" />
     <Content Include="Views\Ex3\Index.cshtml" />
     <Content Include="Views\Ex4\Index.cshtml" />
   </ItemGroup>

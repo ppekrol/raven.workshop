@@ -7,14 +7,15 @@
 		public int Id { get; set; }
 
 		[Required]
-		[Display(Name = "First Name")]
+		[Display(Name = "Imię")]
 		public string FirstName { get; set; }
 
 		[Required]
-		[Display(Name = "Last Name")]
+		[Display(Name = "Nazwisko")]
 		public string LastName { get; set; }
 
 		[Required]
+		[Display(Name = "Wiek")]
 		public uint Age { get; set; }
 	}
 }

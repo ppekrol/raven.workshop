@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Raven.Workshop.Web.Models.Employee>
+﻿@model IList<Raven.Workshop.Web.Models.Employee>
 
 @{
     ViewBag.Title = "Zadanie 2";
@@ -8,36 +8,52 @@
 <p>
     @Html.ActionLink("Dodaj pracownika", "Add")
 </p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Age)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Age)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
-}
 
-</table>
+<div class="row">
+    <div class="span12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Imię
+                    </th>
+                    <th>Nazwisko
+                    </th>
+                    <th>Wiek
+                    </th>
+                    <th>Edycja
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model == null || Model.Count == 0)
+                {
+                    <tr>
+                        <td colspan="4">Brak pracowników</td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Age)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }) |
+                                @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
