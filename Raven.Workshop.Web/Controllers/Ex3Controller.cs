@@ -1,26 +1,64 @@
-﻿using Raven.Workshop.Web.Indexes;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
+using Raven.Workshop.Web.Helpers;
+using Raven.Workshop.Web.Models;
+using Raven.Workshop.Web.ViewModels;
 
 namespace Raven.Workshop.Web.Controllers
 {
-    using System.Linq;
-    using System.Web.Mvc;
+	public class Ex3Controller : RavenController
+	{
+		 public ActionResult Index()
+		 {
+			 var model = new CompaniesAndEmployeesViewModel
+				 {
+					 Companies = RavenSession.Query<Company>().Customize(x => x.WaitForNonStaleResultsAsOfNow()).ToList(),
+					 Employees = RavenSession.Query<Employee>().Customize(x => x.WaitForNonStaleResultsAsOfNow()).ToList()
+				 };
 
-    using Raven.Workshop.Web.Helpers;
-    using Raven.Workshop.Web.Models;
+			 return View(model);
+		 }
 
-    public class Ex3Controller : RavenController
-    {
-        public ActionResult Index()
-        {
-            WorkshopHelper.DeployData(RavenSession);
+		public ActionResult Add(string companyName)
+		{
+			RavenSession.Store(new Company
+				{
+					Name = companyName,
+					EmployeeIds = new List<string>()
+				});
 
-            var companies = RavenSession
-                .Advanced
-                .LuceneQuery<Company, CompanyEmployees>()
-                .WhereStartsWith("FirstName", "J")
-                .ToList();
+			return RedirectToAction("Index");
+		}
 
-            return View(companies);
-        }
-    }
+		public ActionResult Hire(string employeeId, string companyId)
+		{
+			var company = RavenSession.Load<Company>(companyId);
+			company.EmployeeIds.Add(employeeId);
+
+			return RedirectToAction("Index");
+		}
+
+		public ActionResult ShowCompany(string id)
+		{
+			var company = RavenSession.Include<Company>(x => x.EmployeeIds).Load(id);
+
+			var employees = new List<string>();
+
+			foreach (var employeeId in company.EmployeeIds)
+			{
+				var employee = RavenSession.Load<Employee>(employeeId);
+				
+				employees.Add(employee.FirstName + " " + employee.LastName);
+			}
+
+			var model = new CompanyViewModel()
+			{
+				CompanyName = company.Name,
+				EmployeeFullNames = employees
+			};
+
+			return View(model);
+		}
+	}
 }

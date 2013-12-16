@@ -1,18 +1,20 @@
-﻿@model List<Raven.Workshop.Web.Indexes.EmployeesByFirstNameCount.Result>
+﻿@model IList<Raven.Workshop.Web.Models.Company>
 
 @{
-    ViewBag.Title = "Zadanie IV - indeksy typu map-reduce";
+    ViewBag.Title = "Zadanie IV - statyczny indeks";
 }
 
 <div class="page-header">
-    <h1>Zadanie IV <small>indeksy typu map-reduce</small></h1>
+    <h1>Zadanie IV <small>statyczne indeksy i zapytania Lucene</small></h1>
 </div>
 <p class="lead">
-    Poniższe zadanie zapozna was z indeksami typu map-reduce oraz ich zastosowaniem.
+    Celem tego ćwiczenia jest zapoznanie się z pojęciem statycznego indeksu oraz wykonywaniem zapytań Lucene.
 </p>
 
 <ol>
-    <li>Stworzenie statycznego indeksu typu map-reduce, który pomoże nam wykonać zapytanie zliczające liczbę pracowników po ich imieniu.</li>
+    <li>Stworzenie statycznego indeksu, który pomoże nam wykonać zapytanie o wszystkie firmy, w których istnieje co najmniej jeden pracownik, którego imię zaczyna się na 'J'</li>
+    <li>Zapoznanie się z możliwościami ładowania powiązanych dokumentów w indeksie</li>
+    <li>Zapoznanie się z zapytaniami Lucene</li>
 </ol>
 
 <hr />
@@ -26,10 +28,7 @@
                         #
                     </th>
                     <th>
-                        Imię
-                    </th>
-                    <th>
-                        Liczba
+                        Nazwa
                     </th>
                 </tr>
             </thead>
@@ -37,23 +36,20 @@
                 @if (Model == null || Model.Count == 0)
                 {
                     <tr>
-                        <td colspan="3">Brak wyników</td>
+                        <td colspan="2">Brak wyników</td>
                     </tr>
                 }
                 else
                 {
                     for (int i = 0; i < Model.Count; i++)
                     {
-                        var result = Model[i];
+                        var employeeWithCompany = Model[i];
                         <tr>
                             <td>
                                 @(i + 1)
                             </td>
                             <td>
-                                @result.EmployeeFirstName
-                            </td>
-                            <td>
-                                @result.Count
+                                @employeeWithCompany.Name
                             </td>
                         </tr>
                     }

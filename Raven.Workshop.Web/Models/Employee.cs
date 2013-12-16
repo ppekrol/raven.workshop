@@ -4,7 +4,7 @@
 
     public class Employee
 	{
-		public int Id { get; set; }
+		public string Id { get; set; }
 
 		[Required(ErrorMessage = "Imię jest wymagane.")]
 		[Display(Name = "Imię")]

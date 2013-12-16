@@ -1,0 +1,21 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Zadanie 3 - ładowanie referencji";
+}
+
+<div class="page-header">
+    <h1>Zadanie III <small>ładowanie referencji</small></h1>
+</div>
+<p class="lead">
+    Zadaniem jest załadowanie obiektu <i>Company</i> oraz wszystkich jego referencji <i>Employee</i>. Wszystkie obiekty powinny zostać pobrane w jednym zapytaniu HTTP.
+</p>
+
+<ol>
+    <li>Pobranie właściwego dokumentu z kolekcji <i>companies/</i> na podstawie ID</li>
+    <li>Pobranie wszystkich dokumentów z kolekcji <i>employees/</i> referencjonowanych przez firmę</li>
+    <li>Przekazanie obiektu modelu <i>CompanyViewModel</i></li>
+</ol>
+
+<hr />
+
+@RenderBody()

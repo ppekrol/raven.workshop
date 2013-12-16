@@ -1,0 +1,80 @@
+﻿@using Raven.Workshop.Web.ViewModels
+@model IEnumerable<Raven.Workshop.Web.ViewModels.CompanyViewModel>
+@{
+    ViewBag.Title = "Zadanie VI - transformacja wyników zapytań";
+}
+
+<div class="page-header">
+    <h1>Zadanie VI <small>transformowanie wyników zapytań</small></h1>
+</div>
+<p class="lead">
+    Zadanie polega na wyświetleniu wszystkich pracowników dla wyszkukiwanej nazwy firmy. Wyniki zapytania powinny zwrócić nazwę firmy oraz tablicę imion i nazwisk wszystkich jej pracowników.
+</p>
+
+<ol>
+    <li>Stworzenie klasy transformacji</li>
+    <li>Dodanie transformacji do bazy danych</li>
+    <li>Stworzenie zapytania wyświetlającego listę pracowników</li>
+</ol>
+
+<hr />
+
+@using (Html.BeginForm("Index", "Ex6", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <div class="row">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+    </div>
+     <div class="row">
+        <div class="control-group">
+            @Html.Label("Prefiks nazwy firmy", new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBox("companyNamePrefix")
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-large btn-success">Szukaj</button>
+            </div>
+        </div>
+    </div>
+}
+
+@foreach (var company in Model ?? Enumerable.Empty<CompanyViewModel>())
+{
+    <div>
+        Firma: @company.CompanyName
+    </div>
+    <div class="row">
+        <div class="span12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Pracownicy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!company.EmployeeFullNames.Any())
+                    {
+                        <tr>
+                            <td>Brak pracowników</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var item in company.EmployeeFullNames)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item)
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

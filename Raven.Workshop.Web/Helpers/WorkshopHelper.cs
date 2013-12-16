@@ -11,19 +11,19 @@
 
         public static void DeployData(IDocumentSession session)
         {
-            var employee1 = new Employee { Age = 30, FirstName = "Jan", LastName = "Nowak", Id = 5000 };
-            var employee2 = new Employee { Age = 33, FirstName = "Krzysztof", LastName = "Nowak", Id = 5001 };
-            var employee3 = new Employee { Age = 32, FirstName = "Edward", LastName = "Nowak", Id = 5002 };
-            var employee4 = new Employee { Age = 40, FirstName = "Janusz", LastName = "Nowak", Id = 5003 };
-            var employee5 = new Employee { Age = 39, FirstName = "Janina", LastName = "Nowak", Id = 5004 };
-            var employee6 = new Employee { Age = 35, FirstName = "Julian", LastName = "Nowak", Id = 5005 };
-            var employee7 = new Employee { Age = 37, FirstName = "Dominik", LastName = "Nowak", Id = 5006 };
-            var employee8 = new Employee { Age = 39, FirstName = "Andrzej", LastName = "Nowak", Id = 5007 };
-            var employee9 = new Employee { Age = 34, FirstName = "Zbigniew", LastName = "Nowak", Id = 5008 };
-            var employee10 = new Employee { Age = 29, FirstName = "Agnieszka", LastName = "Nowak", Id = 5009 };
-            var employee11 = new Employee { Age = 29, FirstName = "Dominik", LastName = "Nowak", Id = 5010 };
-            var employee12 = new Employee { Age = 29, FirstName = "Andrzej", LastName = "Nowak", Id = 5011 };
-            var employee13 = new Employee { Age = 29, FirstName = "Dominik", LastName = "Nowak", Id = 5013 };
+            var employee1 = new Employee { Age = 30, FirstName = "Jan", LastName = "Nowak", Id = "employees/" + 5000 };
+			var employee2 = new Employee { Age = 33, FirstName = "Krzysztof", LastName = "Nowak", Id = "employees/" + 5001 };
+			var employee3 = new Employee { Age = 32, FirstName = "Edward", LastName = "Nowak", Id = "employees/" + 5002 };
+			var employee4 = new Employee { Age = 40, FirstName = "Janusz", LastName = "Nowak", Id = "employees/" + 5003 };
+			var employee5 = new Employee { Age = 39, FirstName = "Janina", LastName = "Nowak", Id = "employees/" + 5004 };
+			var employee6 = new Employee { Age = 35, FirstName = "Julian", LastName = "Nowak", Id = "employees/" + 5005 };
+			var employee7 = new Employee { Age = 37, FirstName = "Dominik", LastName = "Nowak", Id = "employees/" + 5006 };
+			var employee8 = new Employee { Age = 39, FirstName = "Andrzej", LastName = "Nowak", Id = "employees/" + 5007 };
+			var employee9 = new Employee { Age = 34, FirstName = "Zbigniew", LastName = "Nowak", Id = "employees/" + 5008 };
+			var employee10 = new Employee { Age = 29, FirstName = "Agnieszka", LastName = "Nowak", Id = "employees/" + 5009 };
+			var employee11 = new Employee { Age = 29, FirstName = "Dominik", LastName = "Nowak", Id = "employees/" + 5010 };
+			var employee12 = new Employee { Age = 29, FirstName = "Andrzej", LastName = "Nowak", Id = "employees/" + 5011 };
+			var employee13 = new Employee { Age = 29, FirstName = "Dominik", LastName = "Nowak", Id = "employees/" + 5013 };
 
             var company1 = new Company
             {

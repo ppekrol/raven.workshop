@@ -6,6 +6,7 @@ namespace Raven.Workshop.Web.Controllers
     using System.Web.Mvc;
 
     using Raven.Workshop.Web.Helpers;
+    using Raven.Workshop.Web.Models;
 
     public class Ex4Controller : RavenController
     {
@@ -13,12 +14,14 @@ namespace Raven.Workshop.Web.Controllers
         {
             WorkshopHelper.DeployData(RavenSession);
 
-            var results =
-                RavenSession
-                .Query<EmployeesByFirstNameCount.Result, EmployeesByFirstNameCount>()
+            var companies = RavenSession
+                .Advanced
+                .LuceneQuery<Company, CompanyEmployees>()
+                .WhereStartsWith("FirstName", "J")
+				.WaitForNonStaleResultsAsOfNow()
                 .ToList();
 
-            return View(results);
+            return View(companies);
         }
     }
 }

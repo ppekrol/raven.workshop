@@ -1,30 +1,24 @@
-﻿using System.Linq;
-using System.Web.Mvc;
-using Raven.Client.Linq;
-using Raven.Workshop.Web.Indexes;
-using Raven.Workshop.Web.Models;
-using Raven.Workshop.Web.Transformers;
-using Raven.Workshop.Web.ViewModels;
+﻿using Raven.Workshop.Web.Indexes;
 
 namespace Raven.Workshop.Web.Controllers
 {
-	public class Ex5Controller : RavenController
-	{
-		public ActionResult Index()
-		{
-			return View();
-		}
+    using System.Linq;
+    using System.Web.Mvc;
 
-		[HttpPost]
-		public ActionResult Index(string companyNamePrefix)
-		{
-			var result =
-				RavenSession.Query<Company, CompanyByName>()
-							.Where(c => c.Name.StartsWith(companyNamePrefix))
-							.TransformWith<CompaniesWithEmployees, CompanyEmployeesViewModel>();
+    using Raven.Workshop.Web.Helpers;
 
+    public class Ex5Controller : RavenController
+    {
+        public ActionResult Index()
+        {
+            WorkshopHelper.DeployData(RavenSession);
 
-			return View(result);
-		}
-	}
+            var results =
+                RavenSession
+                .Query<EmployeesByFirstNameCount.Result, EmployeesByFirstNameCount>()
+                .ToList();
+
+            return View(results);
+        }
+    }
 }
