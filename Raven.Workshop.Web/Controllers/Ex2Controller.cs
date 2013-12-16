@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using Raven.Workshop.Web.Extensions;
 using Raven.Workshop.Web.Models;
 
 namespace Raven.Workshop.Web.Controllers
@@ -41,7 +42,7 @@ namespace Raven.Workshop.Web.Controllers
 
 		public ActionResult Delete(int id)
 		{
-			RavenSession.Delete(RavenSession.Load<Employee>(id));
+			DocumentStore.DatabaseCommands.Delete<Employee>(id, DocumentStore.Conventions);
 
 			return RedirectToAction("Index");
 		}
