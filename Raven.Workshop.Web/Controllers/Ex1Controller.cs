@@ -23,16 +23,5 @@
 
             return View(stats);
         }
-
-		//[HttpPost]
-		//public ActionResult Index(TestModel model)
-		//{
-		//	if (!ModelState.IsValid)
-		//	{
-		//		return View(model);
-		//	}
-
-		//	return View(model);
-		//}
     }
 }
